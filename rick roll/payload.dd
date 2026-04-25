@@ -21,7 +21,8 @@ STRING Invoke-WebRequest -Uri $Url -OutFile $LocalPath
 ENTER
 DELAY 2000
 
-STRING $MusicCommand = "Add-Type -As presentationCore; `$m=New-Object System.Windows.Media.MediaPlayer; `$m.Open('$LocalPath'); while(`$m.NaturalDuration.HasTimeSpan -eq `$false){Sleep 1}; `$m.Volume=1; `$w=New-Object -Com WScript.Shell; while(1){ `$m.Play(); do { `$w.SendKeys([char]175); Sleep -m 500 } while (`$m.Position -lt `$m.NaturalDuration.TimeSpan); `$m.Position=[TimeSpan]::Zero }"
+REM MusicCommand com delay inicial de 30 segundos (Sleep 30)
+STRING $MusicCommand = "Sleep 30; Add-Type -As presentationCore; `$m=New-Object System.Windows.Media.MediaPlayer; `$m.Open('$LocalPath'); while(`$m.NaturalDuration.HasTimeSpan -eq `$false){Sleep 1}; `$m.Volume=1; `$w=New-Object -Com WScript.Shell; while(1){ `$m.Play(); do { `$w.SendKeys([char]175); Sleep -m 500 } while (`$m.Position -lt `$m.NaturalDuration.TimeSpan); `$m.Position=[TimeSpan]::Zero }"
 ENTER
 DELAY 500
 
