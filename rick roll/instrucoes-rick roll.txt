@@ -1,0 +1,36 @@
+COMO FUNCIONA O PICO-DUCKY (RICKROLL EDITION)
+
+* O QUE É ISSO? 
+Este dispositivo é um Raspberry Pi Pico configurado como um "BadUSB". 
+Ao ser plugado, o computador o reconhece como um teclado comum e ele 
+digita comandos em alta velocidade para realizar as seguintes ações:
+
+1. Abre o PowerShell de forma automatizada.
+2. Baixa um arquivo de áudio (.mp3) do GitHub para a pasta 'Músicas' do usuário.
+3. Cria um script invisível que toca a música em loop infinito.
+4. Ativa uma "Trava de Volume": O script monitora o sistema e força o 
+   volume para 100% a cada meio segundo, impedindo que alguém silencie.
+5. Persistência: Ele se copia para a pasta 'Startup' (Inicializar) do Windows,
+   o que faz com que a música e a trava de volume iniciem sozinhas toda vez
+   que o computador for ligado.
+
+* COMO PARAR O CAOS? 
+
+Se você precisar interromper a execução, siga estes passos:
+
+1. PARAR A MÚSICA E A TRAVA DE VOLUME AGORA:
+   - Pressione 'Ctrl + Shift + Esc' para abrir o Gerenciador de Tarefas.
+   - Vá na aba 'Detalhes'.
+   - Procure por processos chamados 'powershell.exe'.
+   - Clique com o botão direito e selecione 'Finalizar Árvore de Processos'.
+   - (Alternativa via terminal: Stop-Process -Name "powershell" -Force)
+
+2. REMOVER A INICIALIZAÇÃO AUTOMÁTICA (PERSISTÊNCIA):
+   - Pressione 'Win + R', digite 'shell:startup' e dê Enter.
+   - Uma pasta será aberta. Localize o arquivo chamado 'SystemAudioFix.bat'.
+   - Delete este arquivo.
+   - Agora o Rickroll não voltará mais quando o PC reiniciar.
+
+3. LIMPAR O ARQUIVO DE ÁUDIO:
+   - Vá em C:\Users\[SeuUsuário]\Music e delete o arquivo 'audio.mp3'.
+
